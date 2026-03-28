@@ -1,4 +1,6 @@
 import { neon } from '@neondatabase/serverless';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' }); // Assuming .env is at current DrAra root
 
 if (!process.env.DATABASE_URL) {
   throw new Error('DATABASE_URL is not set in environment variables');
@@ -6,7 +8,6 @@ if (!process.env.DATABASE_URL) {
 
 export const sql = neon(process.env.DATABASE_URL);
 
-// Function to initialize the database table if it doesn't exist
 export async function initDb() {
   await sql`
     CREATE TABLE IF NOT EXISTS users (
